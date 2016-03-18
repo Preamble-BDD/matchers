@@ -13,7 +13,7 @@ window["preamble"]["matchers"] = window["preamble"]["matchers"] || matchers;
 // toBeTrue/not.toBeTrue matchers
 matchers.push({
     apiName: "toBeTrue",
-    api: (matcherValue: any): void => { },
+    api: (): void => { },
     evalueator: (expectedValue): boolean => expectedValue === true,
     negator: true,
     minArgs: 0,
@@ -23,7 +23,7 @@ matchers.push({
 // toBeTruthy/not.toBeTruthy matchers
 matchers.push({
     apiName: "toBeTruthy",
-    api: (matcherValue: any): void => { },
+    api: (): void => { },
     evalueator: (expectedValue): boolean => !!expectedValue,
     negator: true,
     minArgs: 0,
@@ -53,7 +53,7 @@ matchers.push({
 // toBeUndefined/not.toBeUndefined matchers
 matchers.push({
     apiName: "toBeUndefined",
-    api: (matcherValue: any): void => { },
+    api: (): void => { },
     evalueator: (expectedValue): boolean => expectedValue === undefined,
     negator: true,
     minArgs: 0,
@@ -63,9 +63,22 @@ matchers.push({
 // toBeNull/not.toBeNull matchers
 matchers.push({
     apiName: "toBeNull",
-    api: (matcherValue: any): void => { },
+    api: (): void => { },
     evalueator: (expectedValue): boolean => expectedValue === null,
     negator: true,
     minArgs: 0,
     maxArgs: 0
+});
+
+// toMatch/not.toMatch matchers
+matchers.push({
+    apiName: "toMatch",
+    api: (matcherValue: RegExp): RegExp => matcherValue ,
+    evalueator: (expectedValue: string, matcherValue: RegExp): boolean => {
+        let matchResults: RegExpMatchArray = matcherValue.exec(expectedValue);
+        return matchResults !== null;
+    },
+    negator: true,
+    minArgs: 1,
+    maxArgs: 1
 });
