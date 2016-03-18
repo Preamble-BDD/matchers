@@ -50,6 +50,16 @@ matchers.push({
     maxArgs: 1
 });
 
+// toBeDefined/not.toBeDefined matchers
+matchers.push({
+    apiName: "toBeDefined",
+    api: (): void => { },
+    evalueator: (expectedValue): boolean => expectedValue !== undefined,
+    negator: true,
+    minArgs: 0,
+    maxArgs: 0
+});
+
 // toBeUndefined/not.toBeUndefined matchers
 matchers.push({
     apiName: "toBeUndefined",
