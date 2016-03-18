@@ -84,10 +84,7 @@ matchers.push({
 matchers.push({
     apiName: "toMatch",
     api: (matcherValue: RegExp): RegExp => matcherValue ,
-    evalueator: (expectedValue: string, matcherValue: RegExp): boolean => {
-        let matchResults: RegExpMatchArray = matcherValue.exec(expectedValue);
-        return matchResults !== null;
-    },
+    evalueator: (expectedValue: string, matcherValue: RegExp): boolean => matcherValue.exec(expectedValue) !== null,
     negator: true,
     minArgs: 1,
     maxArgs: 1
