@@ -2,7 +2,6 @@
  * Preamble's Out Of The Box Matchers
  */
 
-// import {IMatcher} from "./IMatcher";
 import {deepRecursiveCompare} from "./comparators/deeprecursiveequal";
 
 let matchers: IMatcher[] = [];
