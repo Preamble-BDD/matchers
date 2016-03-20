@@ -2,8 +2,6 @@
  * Preamble's Out Of The Box Matchers
  */
 
-import {deepRecursiveCompare} from "./comparators/deeprecursiveequal";
-
 let matchers: IMatcher[] = [];
 
 window["preamble"] = window["preamble"] || {};
