@@ -88,6 +88,16 @@
             minArgs: 1,
             maxArgs: 1
         });
+
+        // toHaveBeenCalled/not.toHaveBeenCalled matchers
+        registerMatcher({
+            apiName: "toHaveBeenCalled",
+            api: (): void => { },
+            evalueator: (expectedValue: Snoopster): boolean => expectedValue.calls.count() > 0,
+            negator: true,
+            minArgs: 0,
+            maxArgs: 0
+        });
     };
 
     window["preamble"] = window["preamble"] || {};
