@@ -98,6 +98,15 @@
             minArgs: 0,
             maxArgs: 0
         });
+        // toHaveBeenCalledWith/not.toHaveBeenCalledWith matchers
+        registerMatcher({
+            apiName: "toHaveBeenCalledWith",
+            api: (...matcherValue): any[] => matcherValue,
+            evalueator: (expectedValue: Snoopster, ...matcherValue): boolean => expectedValue.calls.wasCalledWith(matcherValue),
+            negator: true,
+            minArgs: 1,
+            maxArgs: -1
+        });
     };
 
     window["preamble"] = window["preamble"] || {};
