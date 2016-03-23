@@ -75,7 +75,7 @@ declare interface SpyOnStatic {
     (...args): Snoopster;
 }
 
-declare interface ISpyOn extends SpyOnStatic {
+declare interface SpyOn extends SpyOnStatic {
     x: XStatic;
 }
 

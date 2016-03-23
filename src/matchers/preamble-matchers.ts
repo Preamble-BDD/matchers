@@ -33,7 +33,8 @@
         registerMatcher({
             apiName: "toBe",
             api: (matcherValue: any): any => matcherValue,
-            evalueator: (expectedValue, matcherValue): boolean => expectedValue === matcherValue,
+            evalueator: (expectedValue, matcherValue): boolean =>
+                expectedValue === matcherValue,
             negator: true,
             minArgs: 1,
             maxArgs: 1
@@ -43,7 +44,8 @@
         registerMatcher({
             apiName: "toEqual",
             api: (matcherValue: any): any => matcherValue,
-            evalueator: (expectedValue, matcherValue): boolean => comparators.deepRecursiveCompare(expectedValue, matcherValue),
+            evalueator: (expectedValue, matcherValue): boolean =>
+                comparators.deepRecursiveCompare(expectedValue, matcherValue),
             negator: true,
             minArgs: 1,
             maxArgs: 1
@@ -83,7 +85,8 @@
         registerMatcher({
             apiName: "toMatch",
             api: (matcherValue: RegExp): RegExp => matcherValue,
-            evalueator: (expectedValue: string, matcherValue: RegExp): boolean => matcherValue.exec(expectedValue) !== null,
+            evalueator: (expectedValue: string, matcherValue: RegExp): boolean =>
+                matcherValue.exec(expectedValue) !== null,
             negator: true,
             minArgs: 1,
             maxArgs: 1
@@ -93,7 +96,8 @@
         registerMatcher({
             apiName: "toHaveBeenCalled",
             api: (): void => { },
-            evalueator: (expectedValue: Snoopster): boolean => expectedValue.calls.count() > 0,
+            evalueator: (expectedValue: Snoopster): boolean =>
+                expectedValue.calls.count() > 0,
             negator: true,
             minArgs: 0,
             maxArgs: 0
@@ -102,10 +106,71 @@
         registerMatcher({
             apiName: "toHaveBeenCalledWith",
             api: (...matcherValue): any[] => matcherValue,
-            evalueator: (expectedValue: Snoopster, ...matcherValue): boolean => expectedValue.calls.wasCalledWith(matcherValue),
+            evalueator: (expectedValue: Snoopster, ...matcherValue): boolean =>
+                expectedValue.calls.wasCalledWith(matcherValue),
             negator: true,
             minArgs: 1,
             maxArgs: -1
+        });
+        // toHaveBeenCalledWithContext/not.toHaveBeenCalledWithContext matchers
+        registerMatcher({
+            apiName: "toHaveBeenCalledWithContext",
+            api: (matcherValue): {} => matcherValue,
+            evalueator: (expectedValue: Snoopster, matcherValue): boolean =>
+                expectedValue.calls.wasCalledWithContext(matcherValue),
+            negator: true,
+            minArgs: 1,
+            maxArgs: 1
+        });
+        // toHaveReturnedValue/not.toHaveReturnedValue matchers
+        registerMatcher({
+            apiName: "toHaveReturnedValue",
+            api: (matcherValue): any => matcherValue,
+            evalueator: (expectedValue: Snoopster, matcherValue): boolean =>
+                expectedValue.calls.returned(matcherValue),
+            negator: true,
+            minArgs: 1,
+            maxArgs: 1
+        });
+        // toHaveThrown/not.toHaveThrown matchers
+        registerMatcher({
+            apiName: "toHaveThrown",
+            api: (): void => { },
+            evalueator: (expectedValue: Snoopster): boolean =>
+                expectedValue.calls.threw(),
+            negator: true,
+            minArgs: 0,
+            maxArgs: 0
+        });
+        // toHaveThrownWithMessage/not.toHaveThrownWithMessage matchers
+        registerMatcher({
+            apiName: "toHaveThrownWithMessage",
+            api: (matcherValue): string => matcherValue,
+            evalueator: (expectedValue: Snoopster, matcherValue: string): boolean =>
+                expectedValue.calls.threwWithMessage(matcherValue),
+            negator: true,
+            minArgs: 1,
+            maxArgs: 1
+        });
+        // toHaveThrownWithName/not.toHaveThrownWithName matchers
+        registerMatcher({
+            apiName: "toHaveThrownWithName",
+            api: (matcherValue): string => matcherValue,
+            evalueator: (expectedValue: Snoopster, matcherValue: string): boolean =>
+                expectedValue.calls.threwWithName(matcherValue),
+            negator: true,
+            minArgs: 1,
+            maxArgs: 1
+        });
+        // toHaveThrownWithName/not.toHaveThrownWithName matchers
+        registerMatcher({
+            apiName: "toHaveThrownWithName",
+            api: (matcherValue): string => matcherValue,
+            evalueator: (expectedValue: Snoopster, matcherValue: string): boolean =>
+                expectedValue.calls.threwWithName(matcherValue),
+            negator: true,
+            minArgs: 1,
+            maxArgs: 1
         });
     };
 
