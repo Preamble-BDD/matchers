@@ -96,7 +96,7 @@
         registerMatcher({
             apiName: "toHaveBeenCalled",
             api: (): void => { },
-            evalueator: (expectedValue: Snoopster): boolean =>
+            evalueator: (expectedValue: Spy): boolean =>
                 expectedValue.calls.count() > 0,
             negator: true,
             minArgs: 0,
@@ -106,7 +106,7 @@
         registerMatcher({
             apiName: "toHaveBeenCalledWith",
             api: (...matcherValue): any[] => matcherValue,
-            evalueator: (expectedValue: Snoopster, ...matcherValue): boolean =>
+            evalueator: (expectedValue: Spy, matcherValue): boolean =>
                 expectedValue.calls.wasCalledWith(matcherValue),
             negator: true,
             minArgs: 1,
@@ -116,7 +116,7 @@
         registerMatcher({
             apiName: "toHaveBeenCalledWithContext",
             api: (matcherValue): {} => matcherValue,
-            evalueator: (expectedValue: Snoopster, matcherValue): boolean =>
+            evalueator: (expectedValue: Spy, matcherValue): boolean =>
                 expectedValue.calls.wasCalledWithContext(matcherValue),
             negator: true,
             minArgs: 1,
@@ -126,7 +126,7 @@
         registerMatcher({
             apiName: "toHaveReturnedValue",
             api: (matcherValue): any => matcherValue,
-            evalueator: (expectedValue: Snoopster, matcherValue): boolean =>
+            evalueator: (expectedValue: Spy, matcherValue): boolean =>
                 expectedValue.calls.returned(matcherValue),
             negator: true,
             minArgs: 1,
@@ -136,7 +136,7 @@
         registerMatcher({
             apiName: "toHaveThrown",
             api: (): void => { },
-            evalueator: (expectedValue: Snoopster): boolean =>
+            evalueator: (expectedValue: Spy): boolean =>
                 expectedValue.calls.threw(),
             negator: true,
             minArgs: 0,
@@ -146,7 +146,7 @@
         registerMatcher({
             apiName: "toHaveThrownWithMessage",
             api: (matcherValue): string => matcherValue,
-            evalueator: (expectedValue: Snoopster, matcherValue: string): boolean =>
+            evalueator: (expectedValue: Spy, matcherValue: string): boolean =>
                 expectedValue.calls.threwWithMessage(matcherValue),
             negator: true,
             minArgs: 1,
@@ -156,7 +156,7 @@
         registerMatcher({
             apiName: "toHaveThrownWithName",
             api: (matcherValue): string => matcherValue,
-            evalueator: (expectedValue: Snoopster, matcherValue: string): boolean =>
+            evalueator: (expectedValue: Spy, matcherValue: string): boolean =>
                 expectedValue.calls.threwWithName(matcherValue),
             negator: true,
             minArgs: 1,
@@ -166,7 +166,7 @@
         registerMatcher({
             apiName: "toHaveThrownWithName",
             api: (matcherValue): string => matcherValue,
-            evalueator: (expectedValue: Snoopster, matcherValue: string): boolean =>
+            evalueator: (expectedValue: Spy, matcherValue: string): boolean =>
                 expectedValue.calls.threwWithName(matcherValue),
             negator: true,
             minArgs: 1,
