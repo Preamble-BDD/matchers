@@ -1,15 +1,15 @@
-declare interface StaticSnoopster {
+declare interface StaticSpy {
     (...args): any;
 }
 
 declare interface It {
-    toBeCalled: () => Snoopster;
-    toBeCalledWith: () => Snoopster;
-    toBeCalledWithContext: (context: {}) => Snoopster;
-    toReturn: (value: any) => Snoopster;
-    toThrow: () => Snoopster;
-    toThrowWithName: (name: string) => Snoopster;
-    toThrowWithMessage: (message: string) => Snoopster;
+    toBeCalled: () => Spy;
+    toBeCalledWith: () => Spy;
+    toBeCalledWithContext: (context: {}) => Spy;
+    toReturn: (value: any) => Spy;
+    toThrow: () => Spy;
+    toThrowWithName: (name: string) => Spy;
+    toThrowWithMessage: (message: string) => Spy;
 }
 
 declare interface Expect {
@@ -17,15 +17,15 @@ declare interface Expect {
 }
 
 declare interface And {
-    reset: () => Snoopster;
-    callWithContext: (context: {}) => Snoopster;
-    throw: () => Snoopster;
-    throwWithMessage: (message: string) => Snoopster;
-    throwWithName: (name: string) => Snoopster;
-    return: (ret: any) => Snoopster;
-    callFake: (fn: (...args) => any) => Snoopster;
-    callActual: () => Snoopster;
-    callStub: () => Snoopster;
+    reset: () => Spy;
+    callWithContext: (context: {}) => Spy;
+    throw: () => Spy;
+    throwWithMessage: (message: string) => Spy;
+    throwWithName: (name: string) => Spy;
+    return: (ret: any) => Spy;
+    callFake: (fn: (...args) => any) => Spy;
+    callActual: () => Spy;
+    callStub: () => Spy;
     expect: Expect;
 }
 
@@ -43,7 +43,7 @@ declare interface Calls {
     count: () => number;
     forCall: (i: number) => ACall;
     all: () => ACall[];
-    wasCalledWith: (args: any[]) => boolean;
+    wasCalledWith: (...args) => boolean;
     wasCalledWithContext: (obj: {}) => boolean;
     returned: (value: any) => boolean;
     threw: () => boolean;
@@ -51,8 +51,8 @@ declare interface Calls {
     threwWithMessage: (message: string) => boolean;
 }
 
-declare interface Snoopster extends StaticSnoopster {
-    _snoopsterMaker: string;
+declare interface Spy extends StaticSpy {
+    _spyMaker: string;
     _returns: any;
     _callActual: boolean;
     _callFake: (...args) => any;
@@ -67,22 +67,18 @@ declare interface Snoopster extends StaticSnoopster {
     _resetCalls: () => void;
 }
 
-declare interface XStatic {
-    (argObject: {}, argPropertyNames: string[]): void;
-}
-
 declare interface SpyOnStatic {
-    (...args): Snoopster;
+    (...args): Spy;
 }
 
 declare interface SpyOn extends SpyOnStatic {
-    x: XStatic;
+    x: (argObject: {}, argPropertyNames: string[]) => void;
 }
 
 // args API
 declare class Args {
     args: any[];
-    constructor(...args);
+    constructor(args);
     getLength: () => number;
     hasArg: (i: number) => boolean;
     getArg: (i: number) => any;
