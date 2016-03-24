@@ -107,7 +107,7 @@
             apiName: "toHaveBeenCalledWith",
             api: (...matcherValue): any[] => matcherValue,
             evalueator: (expectedValue: Spy, matcherValue): boolean =>
-                expectedValue.calls.wasCalledWith(matcherValue),
+                expectedValue.calls.wasCalledWith.apply(null, matcherValue),
             negator: true,
             minArgs: 1,
             maxArgs: -1
