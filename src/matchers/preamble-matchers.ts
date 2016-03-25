@@ -13,7 +13,7 @@
         registerMatcher({
             apiName: "toBeTrue",
             api: (): void => { },
-            evalueator: (expectedValue): boolean => expectedValue === true,
+            evaluator: (expectedValue): boolean => expectedValue === true,
             negator: true,
             minArgs: 0,
             maxArgs: 0
@@ -23,7 +23,7 @@
         registerMatcher({
             apiName: "toBeTruthy",
             api: (): void => { },
-            evalueator: (expectedValue): boolean => !!expectedValue,
+            evaluator: (expectedValue): boolean => !!expectedValue,
             negator: true,
             minArgs: 0,
             maxArgs: 0
@@ -33,7 +33,8 @@
         registerMatcher({
             apiName: "toBe",
             api: (matcherValue: any): any => matcherValue,
-            evalueator: (expectedValue, matcherValue): boolean => expectedValue === matcherValue,
+            evaluator: (expectedValue, matcherValue): boolean =>
+                expectedValue === matcherValue,
             negator: true,
             minArgs: 1,
             maxArgs: 1
@@ -43,7 +44,8 @@
         registerMatcher({
             apiName: "toEqual",
             api: (matcherValue: any): any => matcherValue,
-            evalueator: (expectedValue, matcherValue): boolean => comparators.deepRecursiveCompare(expectedValue, matcherValue),
+            evaluator: (expectedValue, matcherValue): boolean =>
+                comparators.deepRecursiveCompare(expectedValue, matcherValue),
             negator: true,
             minArgs: 1,
             maxArgs: 1
@@ -53,7 +55,7 @@
         registerMatcher({
             apiName: "toBeDefined",
             api: (): void => { },
-            evalueator: (expectedValue): boolean => expectedValue !== undefined,
+            evaluator: (expectedValue): boolean => expectedValue !== undefined,
             negator: true,
             minArgs: 0,
             maxArgs: 0
@@ -63,7 +65,7 @@
         registerMatcher({
             apiName: "toBeUndefined",
             api: (): void => { },
-            evalueator: (expectedValue): boolean => expectedValue === undefined,
+            evaluator: (expectedValue): boolean => expectedValue === undefined,
             negator: true,
             minArgs: 0,
             maxArgs: 0
@@ -73,7 +75,7 @@
         registerMatcher({
             apiName: "toBeNull",
             api: (): void => { },
-            evalueator: (expectedValue): boolean => expectedValue === null,
+            evaluator: (expectedValue): boolean => expectedValue === null,
             negator: true,
             minArgs: 0,
             maxArgs: 0
@@ -83,7 +85,89 @@
         registerMatcher({
             apiName: "toMatch",
             api: (matcherValue: RegExp): RegExp => matcherValue,
-            evalueator: (expectedValue: string, matcherValue: RegExp): boolean => matcherValue.exec(expectedValue) !== null,
+            evaluator: (expectedValue: string, matcherValue: RegExp): boolean =>
+                matcherValue.exec(expectedValue) !== null,
+            negator: true,
+            minArgs: 1,
+            maxArgs: 1
+        });
+
+        // toHaveBeenCalled/not.toHaveBeenCalled matchers
+        registerMatcher({
+            apiName: "toHaveBeenCalled",
+            api: (): void => { },
+            evaluator: (expectedValue: Spy): boolean =>
+                expectedValue.calls.count() > 0,
+            negator: true,
+            minArgs: 0,
+            maxArgs: 0
+        });
+        // toHaveBeenCalledWith/not.toHaveBeenCalledWith matchers
+        registerMatcher({
+            apiName: "toHaveBeenCalledWith",
+            api: (...matcherValue): any[] => matcherValue,
+            evaluator: (expectedValue: Spy, matcherValue): boolean =>
+                expectedValue.calls.wasCalledWith.apply(null, matcherValue),
+            negator: true,
+            minArgs: 1,
+            maxArgs: -1
+        });
+        // toHaveBeenCalledWithContext/not.toHaveBeenCalledWithContext matchers
+        registerMatcher({
+            apiName: "toHaveBeenCalledWithContext",
+            api: (matcherValue): {} => matcherValue,
+            evaluator: (expectedValue: Spy, matcherValue): boolean =>
+                expectedValue.calls.wasCalledWithContext(matcherValue),
+            negator: true,
+            minArgs: 1,
+            maxArgs: 1
+        });
+        // toHaveReturnedValue/not.toHaveReturnedValue matchers
+        registerMatcher({
+            apiName: "toHaveReturnedValue",
+            api: (matcherValue): any => matcherValue,
+            evaluator: (expectedValue: Spy, matcherValue): boolean =>
+                expectedValue.calls.returned(matcherValue),
+            negator: true,
+            minArgs: 1,
+            maxArgs: 1
+        });
+        // toHaveThrown/not.toHaveThrown matchers
+        registerMatcher({
+            apiName: "toHaveThrown",
+            api: (): void => { },
+            evaluator: (expectedValue: Spy): boolean =>
+                expectedValue.calls.threw(),
+            negator: true,
+            minArgs: 0,
+            maxArgs: 0
+        });
+        // toHaveThrownWithMessage/not.toHaveThrownWithMessage matchers
+        registerMatcher({
+            apiName: "toHaveThrownWithMessage",
+            api: (matcherValue): string => matcherValue,
+            evaluator: (expectedValue: Spy, matcherValue: string): boolean =>
+                expectedValue.calls.threwWithMessage(matcherValue),
+            negator: true,
+            minArgs: 1,
+            maxArgs: 1
+        });
+        // toHaveThrownWithName/not.toHaveThrownWithName matchers
+        registerMatcher({
+            apiName: "toHaveThrownWithName",
+            api: (matcherValue): string => matcherValue,
+            evaluator: (expectedValue: Spy, matcherValue: string): boolean =>
+                expectedValue.calls.threwWithName(matcherValue),
+            negator: true,
+            minArgs: 1,
+            maxArgs: 1
+        });
+        // toHaveThrownWithName/not.toHaveThrownWithName matchers
+        registerMatcher({
+            apiName: "toHaveThrownWithName",
+            api: (matcherValue): string => matcherValue,
+            evaluator: (expectedValue: Spy, matcherValue: string): boolean =>
+                expectedValue.calls.threwWithName(matcherValue),
             negator: true,
             minArgs: 1,
             maxArgs: 1

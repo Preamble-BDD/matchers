@@ -1,3 +1,3 @@
-interface RegisterMatchers {
+declare interface RegisterMatchers {
     (registerMatcher: (matcher: IMatcher) => void, comparators: Comparators): void;
 }
