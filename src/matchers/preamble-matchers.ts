@@ -13,7 +13,7 @@
         registerMatcher({
             apiName: "toBeTrue",
             api: (): void => { },
-            evalueator: (expectedValue): boolean => expectedValue === true,
+            evaluator: (expectedValue): boolean => expectedValue === true,
             negator: true,
             minArgs: 0,
             maxArgs: 0
@@ -23,7 +23,7 @@
         registerMatcher({
             apiName: "toBeTruthy",
             api: (): void => { },
-            evalueator: (expectedValue): boolean => !!expectedValue,
+            evaluator: (expectedValue): boolean => !!expectedValue,
             negator: true,
             minArgs: 0,
             maxArgs: 0
@@ -33,7 +33,7 @@
         registerMatcher({
             apiName: "toBe",
             api: (matcherValue: any): any => matcherValue,
-            evalueator: (expectedValue, matcherValue): boolean =>
+            evaluator: (expectedValue, matcherValue): boolean =>
                 expectedValue === matcherValue,
             negator: true,
             minArgs: 1,
@@ -44,7 +44,7 @@
         registerMatcher({
             apiName: "toEqual",
             api: (matcherValue: any): any => matcherValue,
-            evalueator: (expectedValue, matcherValue): boolean =>
+            evaluator: (expectedValue, matcherValue): boolean =>
                 comparators.deepRecursiveCompare(expectedValue, matcherValue),
             negator: true,
             minArgs: 1,
@@ -55,7 +55,7 @@
         registerMatcher({
             apiName: "toBeDefined",
             api: (): void => { },
-            evalueator: (expectedValue): boolean => expectedValue !== undefined,
+            evaluator: (expectedValue): boolean => expectedValue !== undefined,
             negator: true,
             minArgs: 0,
             maxArgs: 0
@@ -65,7 +65,7 @@
         registerMatcher({
             apiName: "toBeUndefined",
             api: (): void => { },
-            evalueator: (expectedValue): boolean => expectedValue === undefined,
+            evaluator: (expectedValue): boolean => expectedValue === undefined,
             negator: true,
             minArgs: 0,
             maxArgs: 0
@@ -75,7 +75,7 @@
         registerMatcher({
             apiName: "toBeNull",
             api: (): void => { },
-            evalueator: (expectedValue): boolean => expectedValue === null,
+            evaluator: (expectedValue): boolean => expectedValue === null,
             negator: true,
             minArgs: 0,
             maxArgs: 0
@@ -85,7 +85,7 @@
         registerMatcher({
             apiName: "toMatch",
             api: (matcherValue: RegExp): RegExp => matcherValue,
-            evalueator: (expectedValue: string, matcherValue: RegExp): boolean =>
+            evaluator: (expectedValue: string, matcherValue: RegExp): boolean =>
                 matcherValue.exec(expectedValue) !== null,
             negator: true,
             minArgs: 1,
@@ -96,7 +96,7 @@
         registerMatcher({
             apiName: "toHaveBeenCalled",
             api: (): void => { },
-            evalueator: (expectedValue: Spy): boolean =>
+            evaluator: (expectedValue: Spy): boolean =>
                 expectedValue.calls.count() > 0,
             negator: true,
             minArgs: 0,
@@ -106,7 +106,7 @@
         registerMatcher({
             apiName: "toHaveBeenCalledWith",
             api: (...matcherValue): any[] => matcherValue,
-            evalueator: (expectedValue: Spy, matcherValue): boolean =>
+            evaluator: (expectedValue: Spy, matcherValue): boolean =>
                 expectedValue.calls.wasCalledWith.apply(null, matcherValue),
             negator: true,
             minArgs: 1,
@@ -116,7 +116,7 @@
         registerMatcher({
             apiName: "toHaveBeenCalledWithContext",
             api: (matcherValue): {} => matcherValue,
-            evalueator: (expectedValue: Spy, matcherValue): boolean =>
+            evaluator: (expectedValue: Spy, matcherValue): boolean =>
                 expectedValue.calls.wasCalledWithContext(matcherValue),
             negator: true,
             minArgs: 1,
@@ -126,7 +126,7 @@
         registerMatcher({
             apiName: "toHaveReturnedValue",
             api: (matcherValue): any => matcherValue,
-            evalueator: (expectedValue: Spy, matcherValue): boolean =>
+            evaluator: (expectedValue: Spy, matcherValue): boolean =>
                 expectedValue.calls.returned(matcherValue),
             negator: true,
             minArgs: 1,
@@ -136,7 +136,7 @@
         registerMatcher({
             apiName: "toHaveThrown",
             api: (): void => { },
-            evalueator: (expectedValue: Spy): boolean =>
+            evaluator: (expectedValue: Spy): boolean =>
                 expectedValue.calls.threw(),
             negator: true,
             minArgs: 0,
@@ -146,7 +146,7 @@
         registerMatcher({
             apiName: "toHaveThrownWithMessage",
             api: (matcherValue): string => matcherValue,
-            evalueator: (expectedValue: Spy, matcherValue: string): boolean =>
+            evaluator: (expectedValue: Spy, matcherValue: string): boolean =>
                 expectedValue.calls.threwWithMessage(matcherValue),
             negator: true,
             minArgs: 1,
@@ -156,7 +156,7 @@
         registerMatcher({
             apiName: "toHaveThrownWithName",
             api: (matcherValue): string => matcherValue,
-            evalueator: (expectedValue: Spy, matcherValue: string): boolean =>
+            evaluator: (expectedValue: Spy, matcherValue: string): boolean =>
                 expectedValue.calls.threwWithName(matcherValue),
             negator: true,
             minArgs: 1,
@@ -166,7 +166,7 @@
         registerMatcher({
             apiName: "toHaveThrownWithName",
             api: (matcherValue): string => matcherValue,
-            evalueator: (expectedValue: Spy, matcherValue: string): boolean =>
+            evaluator: (expectedValue: Spy, matcherValue: string): boolean =>
                 expectedValue.calls.threwWithName(matcherValue),
             negator: true,
             minArgs: 1,
