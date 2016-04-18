@@ -162,16 +162,6 @@
             minArgs: 1,
             maxArgs: 1
         });
-        // toHaveThrownWithName/not.toHaveThrownWithName matchers
-        registerMatcher({
-            apiName: "toHaveThrownWithName",
-            api: (matcherValue): string => matcherValue,
-            evaluator: (expectedValue: Spy, matcherValue: string): boolean =>
-                expectedValue.calls.threwWithName(matcherValue),
-            negator: true,
-            minArgs: 1,
-            maxArgs: 1
-        });
     };
 
     window["preamble"] = window["preamble"] || {};
