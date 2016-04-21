@@ -2,20 +2,6 @@ declare interface StaticSpy {
     (...args): any;
 }
 
-declare interface It {
-    toBeCalled: () => Spy;
-    toBeCalledWith: () => Spy;
-    toBeCalledWithContext: (context: {}) => Spy;
-    toReturn: (value: any) => Spy;
-    toThrow: () => Spy;
-    toThrowWithName: (name: string) => Spy;
-    toThrowWithMessage: (message: string) => Spy;
-}
-
-declare interface Expect {
-    it: It;
-}
-
 declare interface And {
     reset: () => Spy;
     callWithContext: (context: {}) => Spy;
@@ -26,7 +12,6 @@ declare interface And {
     callFake: (fn: (...args) => any) => Spy;
     callActual: () => Spy;
     callStub: () => Spy;
-    expect: Expect;
 }
 
 declare interface Expectations {
