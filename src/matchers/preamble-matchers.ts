@@ -164,8 +164,24 @@
         });
     };
 
-    window["preamble"] = window["preamble"] || {};
-    window["preamble"]["registerMatchers"] = window["preamble"]["registerMatchers"] || registerMatchers;
+    interface PreambleGlobal {
+        preamble: {
+            registerMatchers: RegisterMatchers[];
+        };
+    }
+
+    let preambleGlobal: Window | NodeJS.Global | PreambleGlobal;
+
+    if (typeof (window) !== "undefined") {
+        preambleGlobal = window;
+    } else if (typeof (global) !== "undefined") {
+        preambleGlobal = global;
+    } else {
+        throw new Error("Unsuported Environment");
+    }
+
+    let pGlobal: PreambleGlobal = <PreambleGlobal>preambleGlobal;
+    pGlobal.preamble = pGlobal.preamble || { registerMatchers: registerMatchers };
 
     // push register callback onto the array of RegisterMatchers
     registerMatchers.push(register);
