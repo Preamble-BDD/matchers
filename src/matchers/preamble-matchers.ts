@@ -3,12 +3,13 @@
  */
 
 (function() {
+    console.log("matchers: Loading...");
     // array allows for multiple RegisterMatchers callbacks
     let registerMatchers: RegisterMatchers[] = [];
 
     // preamble will call this
     let register: RegisterMatchers = (registerMatcher, comparators) => {
-
+        console.log("matchers: RegisterMatchers called");
         // toBeTrue/not.toBeTrue matchers
         registerMatcher({
             apiName: "toBeTrue",
@@ -181,7 +182,12 @@
     }
 
     let pGlobal: PreambleGlobal = <PreambleGlobal>preambleGlobal;
-    pGlobal.preamble = pGlobal.preamble || { registerMatchers: registerMatchers };
+
+    if (!pGlobal.hasOwnProperty("preamble")) {
+        pGlobal.preamble = { registerMatchers: registerMatchers };
+    } else {
+        pGlobal.preamble.registerMatchers = registerMatchers;
+    }
 
     // push register callback onto the array of RegisterMatchers
     registerMatchers.push(register);
