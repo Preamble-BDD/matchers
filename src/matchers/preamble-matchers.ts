@@ -3,13 +3,11 @@
  */
 
 (function() {
-    console.log("matchers: Loading...");
     // array allows for multiple RegisterMatchers callbacks
     let registerMatchers: RegisterMatchers[] = [];
 
     // preamble will call this
     let register: RegisterMatchers = (registerMatcher, comparators) => {
-        console.log("matchers: RegisterMatchers called");
         // toBeTrue/not.toBeTrue matchers
         registerMatcher({
             apiName: "toBeTrue",
