@@ -8,7 +8,6 @@
 
     // preamble will call this
     let register: RegisterMatchers = (registerMatcher, comparators) => {
-
         // toBeTrue/not.toBeTrue matchers
         registerMatcher({
             apiName: "toBeTrue",
@@ -164,8 +163,21 @@
         });
     };
 
-    window["preamble"] = window["preamble"] || {};
-    window["preamble"]["registerMatchers"] = window["preamble"]["registerMatchers"] || registerMatchers;
+    interface PreambleGlobal {
+        preamble: {
+            registerMatchers: RegisterMatchers[];
+        };
+    }
+
+    let preambleGlobal;
+    preambleGlobal = typeof window !== "undefined" ? window : global;
+    let pGlobal: PreambleGlobal = <PreambleGlobal>preambleGlobal;
+
+    if (!pGlobal.hasOwnProperty("preamble")) {
+        pGlobal.preamble = { registerMatchers: registerMatchers };
+    } else {
+        pGlobal.preamble.registerMatchers = registerMatchers;
+    }
 
     // push register callback onto the array of RegisterMatchers
     registerMatchers.push(register);
