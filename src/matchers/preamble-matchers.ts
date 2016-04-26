@@ -169,16 +169,8 @@
         };
     }
 
-    let preambleGlobal: Window | NodeJS.Global | PreambleGlobal;
-
-    if (typeof (window) !== "undefined") {
-        preambleGlobal = window;
-    } else if (typeof (global) !== "undefined") {
-        preambleGlobal = global;
-    } else {
-        throw new Error("Unsuported Environment");
-    }
-
+    let preambleGlobal;
+    preambleGlobal = typeof window !== "undefined" ? window : global;
     let pGlobal: PreambleGlobal = <PreambleGlobal>preambleGlobal;
 
     if (!pGlobal.hasOwnProperty("preamble")) {
