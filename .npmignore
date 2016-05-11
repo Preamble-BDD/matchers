@@ -1,0 +1,6 @@
+src
+typings
+tsconfig.json
+tsd.json
+**/*.js
+!dist
