@@ -1,6 +1,6 @@
 {
   "name": "@preamble/preamble-ts-matchers",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Default matchers for Preamble-TS-Core",
   "main": "dist/preamble-matchers.js",
   "scripts": {
